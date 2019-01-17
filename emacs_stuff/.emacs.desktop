@@ -1,0 +1,117 @@
+;; -*- mode: emacs-lisp; coding: emacs-mule; -*-
+;; --------------------------------------------------------------------------
+;; Desktop File for Emacs
+;; --------------------------------------------------------------------------
+;; Created Fri Jul 25 17:01:52 2014
+;; Desktop file format version 206
+;; Emacs version 24.1.1
+
+;; Global section:
+(setq desktop-missing-file-warning nil)
+(setq tags-file-name nil)
+(setq tags-table-list '("c:/bdi"))
+(setq search-ring '("m_sdfast" "make_wildcat" "bdiRTSDFastWrapper" "pfc"))
+(setq regexp-search-ring nil)
+(setq register-alist nil)
+(setq file-name-history '("c:/Cygwin/home/mrose/emacs_stuff" "//babel/u/mrose/bdi/rt/robots/Atlas4/controls/Atlas4FAQPIDLowerBodyCtrl.cpp" "//babel/u/mrose/bdi/rt/libs/libbdi_rt/bdiRTSkeletonMathID.h" "//babel/u/mrose/bdi/rt/robots/Atlas4/common/Atlas4SkelMathID.cpp" "//babel/u/mrose/bdi/rt/robots/Atlas4/common/Atlas4SkelMathID.h" "//babel/u/mrose/bdi/rt/robots/wildcat/common/WildCatSkeletonMath.h" "c:/bdi/rt/apps/skeleton_convert/Makefile.make_sdfast" "//babel/u/mrose/bdi/rt/apps/skeleton_convert/Makefile.make_sdfast" "//babel/u/mrose/bdi/rt/robots/Atlas4/config/birdseye/birdseye_mass_props.cfg" "//babel/u/mrose/bdi/rt/robots/Atlas4/config/shared/atlas4_skeleton_structure.cfg" "//babel/u/mrose/bdi/rt/robots/wildcat/config/shared/skeleton_r4.cfg" "//babel/u/mrose/bdi/rt/robots/wildcat/common/wildcat.dat" "//babel/u/mrose/bdi/rt/apps/bdidatadiff/diff.c" "//babel/u/mrose/bdi/rt/apps/skeleton_convert/Makefile" "//babel/u/mrose/bdi/rt/apps/skeleton_convert/main.cpp" "//babel/u/mrose/bdi/rt/libs/libbdi_rt/bdiRTSDFastWrapper.h" "//babel/u/mrose/bdi/rt/robots/wildcat/behaviors/Khontroller.cpp" "//babel/u/mrose/bdi/rt/robots/wildcat/common/WildCatSkeletonMath.cpp" "//babel/u/mrose/bdi/rt/robots/wildcat/common/wildcat_minimal.h" "//babel/u/mrose/bdi/rt/robots/wildcat/common/wildcat.dat" "//babel/u/mrose/bdi/rt/robots/Atlas4/config/gui/Atlas4_default.var" "~/.emacs" "//babel/u/mrose/bdi/rt/robots/Atlas4/common/Atlas4TDLOController2D.h" "//babel/u/mrose/bdi/rt/robots/Atlas4/gaits/Atlas4StepStateTDLO.h" "//babel/u/mrose/bdi/rt/robots/Atlas4/gaits/Atlas4StepStateTDLO.cpp" "//babel/u/mrose/bdi/rt/libs/librt_tdlo/bdiRTTDLOController.cpp" "//babel/u/mrose/bdi/rt/libs/librt_tdlo/bdiRTTDLOController.h" "//babel/u/mrose/bdi/rt/robots/Atlas4/common/Atlas4TDLOController2D.cpp" "//babel/u/mrose/bdi/rt/robots/Atlas4/config/shared/step_tdlo_compliant.cfg" "//babel/u/mrose/bdi/rt/libs/libatlas/AtlasFootPoints.cpp"))
+
+;; Buffer section -- buffers listed in same order as in buffer list:
+(desktop-create-buffer 206
+  "//babel/u/mrose/bdi/rt/robots/Atlas4/controls/Atlas4FAQPIDLowerBodyCtrl.cpp"
+  "Atlas4FAQPIDLowerBodyCtrl.cpp"
+  'c++-mode
+  '(abbrev-mode)
+  6709
+  '(1 nil)
+  nil
+  nil
+  '((tab-width . 4) (indent-tabs-mode . t) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "//babel/u/mrose/bdi/rt/libs/libbdi_rt/bdiRTSkeletonMathID.h"
+  "bdiRTSkeletonMathID.h"
+  'c++-mode
+  '(abbrev-mode)
+  2654
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 4) (indent-tabs-mode . t) (buffer-file-coding-system . iso-latin-1-unix)))
+
+(desktop-create-buffer 206
+  "//babel/u/mrose/bdi/rt/robots/Atlas4/common/Atlas4SkelMathID.cpp"
+  "Atlas4SkelMathID.cpp"
+  'c++-mode
+  '(abbrev-mode)
+  508
+  '(887 nil)
+  nil
+  nil
+  '((tab-width . 4) (indent-tabs-mode . t) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "//babel/u/mrose/bdi/rt/robots/Atlas4/common/Atlas4SkelMathID.h"
+  "Atlas4SkelMathID.h"
+  'c++-mode
+  '(abbrev-mode)
+  340
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 4) (indent-tabs-mode . t) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "//babel/u/mrose/bdi/rt/robots/wildcat/common/WildCatSkeletonMath.h"
+  "WildCatSkeletonMath.h"
+  'c++-mode
+  '(abbrev-mode)
+  1348
+  '(1348 nil)
+  nil
+  nil
+  '((tab-width . 4) (indent-tabs-mode . t) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "//babel/u/mrose/bdi/rt/libs/libbdi_rt/bdiRTSDFastWrapper.h"
+  "bdiRTSDFastWrapper.h"
+  'c++-mode
+  '(abbrev-mode)
+  1
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 4) (indent-tabs-mode . t) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "//babel/u/mrose/bdi/rt/robots/Atlas4/config/gui/Atlas4_default.var"
+  "Atlas4_default.var"
+  'fundamental-mode
+  nil
+  294
+  '(18 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "//babel/u/mrose/bdi/rt/robots/wildcat/behaviors/Khontroller.cpp"
+  "Khontroller.cpp"
+  'c++-mode
+  '(abbrev-mode)
+  20327
+  '(1598 nil)
+  nil
+  nil
+  '((tab-width . 4) (indent-tabs-mode . t) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "//babel/u/mrose/bdi/rt/robots/wildcat/common/WildCatSkeletonMath.cpp"
+  "WildCatSkeletonMath.cpp"
+  'c++-mode
+  '(abbrev-mode)
+  444
+  '(1 nil)
+  nil
+  nil
+  '((tab-width . 4) (indent-tabs-mode . t) (buffer-file-coding-system . undecided-unix)))
+
