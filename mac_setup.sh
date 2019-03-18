@@ -21,7 +21,7 @@ CASKS_INSTALLED=($(brew cask list))
 
 # Here is the list of brews we want to install:
 BREWS_TO_INSTALL="bash-completion watch cmake findutils coreutils \
-  ninja clang-format tmux gtags"
+  ninja clang-format tmux gtags ipython"
 CASKS_TO_INSTALL="xquartz emacs visual-studio-code"
 
 # Upgrade brew:
