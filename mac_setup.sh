@@ -49,6 +49,12 @@ done
 # Clean up:
 brew cleanup
 
+# If the git-completion.bash file doesn't exist, copy it to bash_completion.d
+if [ ! -f /usr/local/etc/bash_completion.d/git-completion ] && \
+     [ -f /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-completion.bash ]; then
+		cp /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-completion.bash /usr/local/etc/bash_completion.d/.
+fi
+
 if [ ! -x "$HERE"/modify_system_settings.sh ]; then
 	chmod +x "$HERE"/modify_system_settings.sh
 fi
