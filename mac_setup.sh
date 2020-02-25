@@ -3,7 +3,6 @@
 HERE="$(dirname $0)"
 echo "Running script located at ${HERE}"
 
-exit 0
 
 if [ -z `xcode-select -p` ]; then
 	echo "XCode not found. Installing."
@@ -21,8 +20,8 @@ CASKS_INSTALLED=($(brew cask list))
 
 # Here is the list of brews we want to install:
 BREWS_TO_INSTALL="bash-completion watch cmake findutils coreutils \
-  ninja clang-format tmux gtags ipython"
-CASKS_TO_INSTALL="xquartz emacs visual-studio-code"
+  ninja clang-format tmux ipython"
+CASKS_TO_INSTALL="xquartz emacs visual-studio-code spectacle iterm2"
 
 # Upgrade brew:
 brew upgrade
