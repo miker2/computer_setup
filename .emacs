@@ -3,14 +3,9 @@
 
 (when (>= emacs-major-version 24)
   (require 'package)
-  (add-to-list
-    'package-archives
-    ;;'("melpa-stable" . "http://stable.melpa.org/packages/") t)
-	'("melpa" . "http://melpa.org/packages/") t)
-(when (< emacs-major-version 24)
-  ;; For important compatibility libraries like cl-lib
-  (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/")))
-  (package-initialize))
+  (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+	(package-initialize)
+	)
 
 (setq-default tab-width 2)
 
@@ -21,18 +16,11 @@
 
 (setq temporary-file-directory "~/emacs_stuff/tmp")
 
-;; Add color-theme support
-(add-to-list 'load-path "~/emacs_stuff/color-theme-6.6.0")
-(add-to-list 'load-path "~/emacs_stuff/emacs-color-theme-solarized")
-(require 'color-theme)
-(require 'color-theme-solarized)
-(require 'color-theme-tango)
-(require 'color-theme-tangotango)
-(require 'color-theme-tango-dark)
-(eval-after-load "color-theme"
-  '(progn
-     (color-theme-initialize)
-	 ))
+(add-to-list 'custom-theme-load-path "~/emacs_stuff/themes")
+
+;;(setq load-path (cons (expand-file-name "/dir/with/cmake-mode") load-path))
+;;(require 'cmake-mode)
+
 
 ;; Standard BDI setup for emacs.  Please replace your home directory in the below.
 ;; Inform emacs where the standard build support elisp files are located.
@@ -46,8 +34,9 @@
 ;; This function implements Boston Google style exceptions
 ;;(add-hook 'c-mode-common-hook 'boston-google-exceptions)
 
-(load "~/emacs_stuff/clang-format.el")
-;;(setq exec-path (append exec-path '("~/bdi/rt/build/tools/linux")))
+;;(load "~/emacs_stuff/clang-format.el")
+(require 'clang-format)
+(setq exec-path (append exec-path '("/usr/local/bin")))
 (global-set-key [f11] 'clang-format-region)
 
 (setq font-lock-maximum-decoration t)
@@ -66,7 +55,7 @@
 (setq reb-re-syntax 'string)
 
 ;; remove toolbar
-(tool-bar-mode -1)
+(menu-bar-mode -1)
 
 ;; this allows limited auto complete with M-return, keep pressing to cycle
 (global-set-key [M-return] 'dabbrev-expand)
@@ -240,8 +229,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-enabled-themes (quote (tango-dark)))
- '(package-selected-packages (quote (matlab-mode))))
+ '(custom-enabled-themes '(tango-dark))
+ '(custom-safe-themes
+	 '("1ccdf932eb9a9107fbbf602d6c2f2d9412039b2417341c9d2181cd9c7efa94ab" "ac4d057902739eb8156af6d73be68482e7cd243a0639526cd71dbd764c9f5710" "aa2c4c7294bc47e1d2a75a5a848d2651a3cd5831f767e5072c6ce7d8ffd2c343" "04f944bf549505e84dc18e384e18a1687ec029594d935d6b6776bbc4961b1b58" "2024df7ae1ecd11a4646d073f85070b44915788e62a129c42c15e1bd65642620" "481c5decd002ddbb655fca645f882385f04106dae5ea096d42bb72137314e5b1" "301461eae09745ef1a380a9722e0b56d4a905261ab6b59584f7fd6718f0ca03a" "abdd8d875bc1f3853f2d904ae83c0cf47567615ca7deb71ca0122a5696292fde" "02fff7eedb18d38b8fd09a419c579570673840672da45b77fde401d8708dc6b5" "79afa0ec278155265cd12f7ac1bae801014f440d4e821d671ce2328b3ac40735" "4ed63f48b559488ed5628344bc3280ad212902d12c7f52f32362018419d46ab3" "0f544cad39494a86ebe31fc88bea4315484c58774d5f453d3ff2ae80054fdc6d" "bcd06819680dab167525050a2ec78f477bfdcdb3b2dd6c91a42517bcca39473d" "f52622b30f9a5e45f6331b9a5c57c92b7d2526fb43d374a115dca6aad17d683b" "5fb239be37cc7292db0b593ba6ae780b7f4e1c60323963d67a10612275da1630" "33ec826583ca3b05faa5bf04412f96e86e2b927721c106232e9e565717e718f2" "680f8b0aab16e080c250057f5b02130b1fe22098eaf834df0ad125cac7e47ceb" "2670afae1ad4a9addff20591ae5f2b4c925f244d9986604a3a56fc358f544def" "ea7bd29d749702b2be5a431299a4cb097a0f6abad17d38fa536d647a31ffa285" "1bb2c9a561b577e8129ea0b04cf3580ca074b0eabfa75dbc269c6bed0f4bedce" "42ced831b476d8326767c4a150cfeb3920bc24c01234cb6c42d0c90b7d800dc6" "5a1cea5ec0c56891010ab636e24e6ff1a65ee5083505cf65c7d39c4ecf43513d" "ca052516d4a60ad1ddbb4eaf931e599fc58c81938cf927333568f167205b596a" "f238808a8c86ab0f72c09949fd6dde230f881832d2e1dd27bf5b6e37fb44c9a5" "761d44dc06b3c8fff771435fd771b170d1bbdd71348b6aaaa6c0d0270d56cb70" "ac69b7e2e928dc1560d5a556043c99d8cb0614c30957bd03dfe82be4a9e917ee" "3e200d49451ec4b8baa068c989e7fba2a97646091fd555eca0ee5a1386d56077" "f5b6be56c9de9fd8bdd42e0c05fecb002dedb8f48a5f00e769370e4517dde0e8" "fa96a61e4eca5f339ad7f1f3442cb5a83696f6a45d9fe2a7bf3b75fc6912bb91" "fee7287586b17efbfda432f05539b58e86e059e78006ce9237b8732fde991b4c" default))
+ '(package-selected-packages
+	 '(protobuf-mode modus-themes spacemacs-theme cyberpunk-theme tango-2-theme solarized-theme clang-format cmake-mode matlab-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

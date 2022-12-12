@@ -58,7 +58,7 @@ Semantic, and Ansi-Color faces are included.")
 	       (:foreground ,alum-1 :background "black"))))
    `(cursor ((,class (:background ,butter-1))))
    ;; Highlighting faces
-   `(fringe ((,class (:background ,alum-6))))
+   `(fringe ((,class (:background ,alum-5))))
    `(highlight ((,class (:foreground ,alum-6 :background ,butter-2))))
    `(region ((,class (:background ,alum-5))))
    `(secondary-selection ((,class (:background ,blue-3))))
@@ -66,12 +66,14 @@ Semantic, and Ansi-Color faces are included.")
    `(lazy-highlight ((,class (:background ,choc-3))))
    `(trailing-whitespace ((,class (:background ,red-3))))
    ;; Mode line faces
-   `(mode-line ((,class
-		 (:box (:line-width -1 :style released-button)
-		  :background ,alum-2 :foreground ,alum-6))))
    `(mode-line-inactive ((,class
-			  (:box (:line-width -1 :style released-button)
-			   :background ,alum-5 :foreground ,alum-1))))
+		 (:box (:line-width -1 :style released-button)
+		  :background ,alum-4 :foreground ,alum-6))))
+   `(mode-line ((,class
+			  (:box (:line-width 1 :color ,alum-3) ;; :style released-button 
+							:background ,alum-5 :foreground ,alum-1))))
+	 ;;;;;;; MOD here ;;;;;;
+	 `(mode-line-buffer-id ((,class (:foreground ,orange-1 :weight bold))))
    ;; Escape and prompt faces
    `(minibuffer-prompt ((,class (:foreground ,cham-0))))
    `(escape-glyph ((,class (:foreground ,butter-3))))
@@ -84,7 +86,7 @@ Semantic, and Ansi-Color faces are included.")
    `(font-lock-constant-face ((,class (:foreground ,plum-0))))
    `(font-lock-function-name-face ((,class (:foreground ,butter-1))))
    `(font-lock-keyword-face ((,class (:foreground ,cham-0))))
-   `(font-lock-string-face ((,class (:foreground ,choc-1))))
+   `(font-lock-string-face ((,class (:foreground ,choc-1 :italic t))))
    `(font-lock-type-face ((,class (:foreground ,blue-0))))
    `(font-lock-variable-name-face ((,class (:foreground ,orange-1))))
    ;; Button and link faces
