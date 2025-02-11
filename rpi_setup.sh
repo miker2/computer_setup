@@ -20,24 +20,38 @@ run_as_root() {
 }
 
 install_essential_tools() {
-    echo "\nInstalling essential tools ...\n"
+    echo -e "\nInstalling essential tools ...\n"
     
     apt-get update
 
     # Basic utilities
     apt-get install -y \
 	net-tools \
+	units \
+	bmon \
+	nload \
+	btop \
+	neofetch \
+	ncdu \
+	bat \
+	duf \
+	exa \
+	entr \
+        exiftool \
+	fzf \
+	vim \
 	emacs-nox \
 	python3 \
 	python3-pip
 }
 
 install_dev_tools() {
-    echo "\nInstalling dev tools ...\n"
+    echo -e "\nInstalling dev tools ...\n"
     
     apt-get update
 
     apt-get install -y \
+	git \
 	build-essential \
 	make \
 	cmake \
@@ -45,11 +59,13 @@ install_dev_tools() {
 	libeigen3-dev \
 	clang \
 	clang-tidy \
-	clang-format
+	clang-format \
+	gdb \
+	gdb-doc
 }
 
 install_docker() {
-    echo "\nInstalling docker ...\n"
+    echo -e "\nInstalling docker ...\n"
 
     apt-get update
     # Install some stuff in prep for docker
@@ -83,27 +99,45 @@ install_docker() {
 }
 
 install_miniconda() {
-    echo "\nInstalling miniconda ...\n"
+    if which conda >/dev/null 2>&1; then
+	echo -e "\nMiniconda alread installed. Skipping.\n"
+    else
+        echo -e "\nInstalling miniconda ...\n"
 
-    mkdir -p ~/miniconda3
-    wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-aarch64.sh \
+        mkdir -p ~/miniconda3
+        wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-aarch64.sh \
 	    -O ~/miniconda3/miniconda.sh
-    bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
-    rm ~/miniconda3/miniconda.sh
+        bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
+        rm ~/miniconda3/miniconda.sh
 
-    source ~/miniconda3/bin/activate
+        source ~/miniconda3/bin/activate
 
-    conda init --all
+        conda init --all
+    fi
+}
+
+setup_git() {
+    if which git >/dev/null 2>&1; then
+        echo -e "\nSetting up git ...\n"
+
+        git config --global user.name "Michael Rose"
+        git config --global user.email "michael.rose0@gmail.com"
+        git config --global init.defaultBranch dev
+    fi
 }
 
 run_as_root install_essential_tools
 
 run_as_root install_dev_tools
 
-run_as_root install_docker
-# Add the current user to the docker group
-sudo usermod -aG docker $USER
+if ! which docker >/dev/null 2>&1; then
+    run_as_root install_docker
+    # Add the current user to the docker group
+    sudo usermod -aG docker $USER
+fi
 
 install_miniconda
+
+setup_git
 
 
