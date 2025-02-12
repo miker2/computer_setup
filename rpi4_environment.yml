@@ -1,0 +1,19 @@
+name: base
+channels:
+  - conda-forge
+dependencies:
+  - ipython
+  - jupyter
+  - numpy
+  - pandas
+  - plotly
+  - polars
+  - scipy
+  - pip
+  - pip:
+    - torch
+    - torchvision
+    - torchaudio
+
+
+
