@@ -8,6 +8,7 @@ dependencies:
   - pandas
   - plotly
   - polars
+  - scikit-learn
   - scipy
   - pip
   - pip:
