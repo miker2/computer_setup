@@ -43,6 +43,11 @@ install_essential_tools() {
 	emacs-nox \
 	python3 \
 	python3-pip
+
+    if [ -e $(which nvidia-smi) ]; then
+	apt-get install -y \
+	    nvtop
+    fi
 }
 
 install_dev_tools() {
