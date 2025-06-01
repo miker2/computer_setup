@@ -13,60 +13,61 @@ fi
 run_as_root() {
     if [[ $EUID -ne 0 ]]; then
         echo "Elevating privileges to run as root..."
-	sudo bash -c "$(declare -f ${1}); ${1}"
+        sudo bash -c "$(declare -f ${1}); ${1}"
     else
-	"$1"
+    "$1"
     fi
 }
 
 install_essential_tools() {
     echo -e "\nInstalling essential tools ...\n"
-    
+
     apt-get update
 
     # Basic utilities
     apt-get install -y \
-	net-tools \
-	units \
-	bmon \
-	nload \
-	btop \
-	neofetch \
-	ncdu \
-	bat \
-	duf \
-	exa \
-	entr \
+        net-tools \
+        units \
+        bmon \
+        nload \
+        btop \
+        neofetch \
+        ncdu \
+        bat \
+        duf \
+        exa \
+        entr \
         exiftool \
-	fzf \
-	vim \
-	emacs-nox \
-	python3 \
-	python3-pip
+        fzf \
+        vim \
+        emacs-nox \
+        python3 \
+        python3-pip \
+        zsh
 
     if [ -e $(which nvidia-smi) ]; then
-	apt-get install -y \
-	    nvtop
+        apt-get install -y \
+            nvtop
     fi
 }
 
 install_dev_tools() {
     echo -e "\nInstalling dev tools ...\n"
-    
+
     apt-get update
 
     apt-get install -y \
-	git \
-	build-essential \
-	make \
-	cmake \
-	ninja-build \
-	libeigen3-dev \
-	clang \
-	clang-tidy \
-	clang-format \
-	gdb \
-	gdb-doc
+        git \
+        build-essential \
+        make \
+        cmake \
+        ninja-build \
+        libeigen3-dev \
+        clang \
+        clang-tidy \
+        clang-format \
+        gdb \
+        gdb-doc
 }
 
 install_docker() {
@@ -75,13 +76,13 @@ install_docker() {
     apt-get update
     # Install some stuff in prep for docker
     apt-get install -y \
-	apt-transport-https \
-	ca-certificates \
-	curl \
-	gnupg \
-	lsb-release \
-	cgroupfs-mount \
-	cgroup-lite
+        apt-transport-https \
+        ca-certificates \
+        curl \
+        gnupg \
+        lsb-release \
+        cgroupfs-mount \
+        cgroup-lite
     # Add Docker's official GPG key:
     install -m 0755 -d /etc/apt/keyrings
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
@@ -95,38 +96,55 @@ install_docker() {
     # Install docker and associated packages
     apt-get update
     apt-get install -y \
-	docker-ce \
-	docker-ce-cli \
-	containerd.io \
-	docker-buildx-plugin \
-	docker-compose-plugin \
+        docker-ce \
+        docker-ce-cli \
+        containerd.io \
+        docker-buildx-plugin \
+        docker-compose-plugin \
         docker-compose
 }
 
-install_miniconda() {
+install_python_tools() {
     if which conda >/dev/null 2>&1; then
-	echo -e "\nMiniconda alread installed. Skipping.\n"
+        echo -e "\nconda already installed. Skipping.\n"
     else
-        echo -e "\nInstalling miniconda ...\n"
+        echo -e "\nInstalling conda/mamba ...\n"
 
-        mkdir -p ~/miniconda3
-	wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-$(uname -p).sh \
-	    -O ~/miniconda3/miniconda.sh
-        bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
-        rm ~/miniconda3/miniconda.sh
-
-        source ~/miniconda3/bin/activate
-
-        conda init --all
+        curl -L -o /tmp/miniforge.sh "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
+        bash /tmp/miniforge.sh
     fi
+
+    if [[ -e $(which uv)]]; then
+        echo -e "\nuv already installed. Skipping.\n"
+    else
+        echo -e "\nInstalling uv ...\n"
+        curl -LsSf https://astral.sh/uv/install.sh | sh
+    fi
+    uv tool install --yes \
+        ruff \
+        pre-commit
 }
 
 setup_git() {
     if which git >/dev/null 2>&1; then
         echo -e "\nSetting up git ...\n"
 
-        git config --global user.name "Michael Rose"
-        git config --global user.email "michael.rose0@gmail.com"
+        # Check if user.name is set
+        if [[ -z "$(git config --global user.name)" ]]; then
+            read -p "Enter your git name: " git_name
+            git config --global user.name "$git_name"
+        else
+            echo "git user.name is already set to: $(git config --global user.name)"
+        fi
+
+        # Check if user.email is set
+        if [[ -z "$(git config --global user.email)" ]]; then
+            read -p "Enter your git email: " git_email
+            git config --global user.email "$git_email"
+        else
+            echo "git user.email is already set to: $(git config --global user.email)"
+        fi
+
         git config --global init.defaultBranch dev
     fi
 }
@@ -141,8 +159,6 @@ if ! which docker >/dev/null 2>&1; then
     sudo usermod -aG docker $USER
 fi
 
-install_miniconda
+install_python_tools
 
 setup_git
-
-
