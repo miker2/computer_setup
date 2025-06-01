@@ -1,3 +1,5 @@
+#! /bin/bash
+
 # This is a collection of common setup functions that are platform agnostic
 
 setup_git() {
@@ -6,16 +8,16 @@ setup_git() {
 
         # Check if user.name is set
         if [[ -z "$(git config --global user.name)" ]]; then
-            read -p "Enter your git name: " git_name
-            git config --global user.name "$git_name"
+            read -r -p "Enter your git name: " git_name
+            git config --global user.name "${git_name}"
         else
             echo "git user.name is already set to: $(git config --global user.name)"
         fi
 
         # Check if user.email is set
         if [[ -z "$(git config --global user.email)" ]]; then
-            read -p "Enter your git email: " git_email
-            git config --global user.email "$git_email"
+            read -r -p "Enter your git email: " git_email
+            git config --global user.email "${git_email}"
         else
             echo "git user.email is already set to: $(git config --global user.email)"
         fi
@@ -34,7 +36,7 @@ install_python_tools() {
         bash /tmp/miniforge.sh
     fi
 
-    if [[ -e $(which uv)]]; then
+    if [ -e "$(which uv)" ]; then
         echo -e "\nuv already installed. Skipping.\n"
     else
         echo -e "\nInstalling uv ...\n"

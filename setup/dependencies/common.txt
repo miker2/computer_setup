@@ -1,0 +1,13 @@
+bash-completion
+bat
+bmon
+btop
+clang-format
+cmake
+duf
+fzf
+git
+ncdu
+nload
+python3
+tmux
