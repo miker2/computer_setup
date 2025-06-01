@@ -1,17 +1,5 @@
 # This is a collection of common setup functions that are platform agnostic
 
-install_brew() {
-    if which brew >/dev/null 2>&1; then
-        echo -e "\nbrew already installed. Skipping.\n"
-    else
-        echo -e "\nInstalling Homebrew ...\n"
-        bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        # Add brew to PATH
-        echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.bashrc
-        eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-    fi
-}
-
 setup_git() {
     if which git >/dev/null 2>&1; then
         echo -e "\nSetting up git ...\n"
