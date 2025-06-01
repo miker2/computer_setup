@@ -34,6 +34,12 @@ setup_git() {
             echo "git user.email is already set to: $(git config --global user.email)"
         fi
 
+        if [[ -z "$(git config --global core.editor)" ]]; then
+            git config --global core.editor "vim"
+        else
+            echo "git core.editor is already set to: $(git config --global core.editor)"
+        fi
+
         git config --global init.defaultBranch dev
     fi
 }
