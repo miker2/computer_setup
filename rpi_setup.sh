@@ -25,25 +25,7 @@ install_essential_tools() {
     apt-get update
 
     # Basic utilities
-    apt-get install -y \
-        net-tools \
-        units \
-        bmon \
-        nload \
-        btop \
-        neofetch \
-        ncdu \
-        bat \
-        duf \
-        exa \
-        entr \
-        exiftool \
-        fzf \
-        vim \
-        emacs-nox \
-        python3 \
-        python3-pip \
-        zsh
+    xargs apt-get install -y < tools.txt
 
     if [ -e $(which nvidia-smi) ]; then
         apt-get install -y \
@@ -51,23 +33,15 @@ install_essential_tools() {
     fi
 }
 
+
 install_dev_tools() {
-    echo -e "\nInstalling dev tools ...\n"
+    if [ $(uname) == "Linux" ]; then
+        echo -e "\nInstalling dev tools ...\n"
 
-    apt-get update
+        apt-get update
 
-    apt-get install -y \
-        git \
-        build-essential \
-        make \
-        cmake \
-        ninja-build \
-        libeigen3-dev \
-        clang \
-        clang-tidy \
-        clang-format \
-        gdb \
-        gdb-doc
+        xargs apt-get install -y < dependencies/build_Linux.txt
+    fi
 }
 
 install_docker() {
@@ -104,50 +78,6 @@ install_docker() {
         docker-compose
 }
 
-install_python_tools() {
-    if which conda >/dev/null 2>&1; then
-        echo -e "\nconda already installed. Skipping.\n"
-    else
-        echo -e "\nInstalling conda/mamba ...\n"
-
-        curl -L -o /tmp/miniforge.sh "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
-        bash /tmp/miniforge.sh
-    fi
-
-    if [[ -e $(which uv)]]; then
-        echo -e "\nuv already installed. Skipping.\n"
-    else
-        echo -e "\nInstalling uv ...\n"
-        curl -LsSf https://astral.sh/uv/install.sh | sh
-    fi
-    uv tool install --yes \
-        ruff \
-        pre-commit
-}
-
-setup_git() {
-    if which git >/dev/null 2>&1; then
-        echo -e "\nSetting up git ...\n"
-
-        # Check if user.name is set
-        if [[ -z "$(git config --global user.name)" ]]; then
-            read -p "Enter your git name: " git_name
-            git config --global user.name "$git_name"
-        else
-            echo "git user.name is already set to: $(git config --global user.name)"
-        fi
-
-        # Check if user.email is set
-        if [[ -z "$(git config --global user.email)" ]]; then
-            read -p "Enter your git email: " git_email
-            git config --global user.email "$git_email"
-        else
-            echo "git user.email is already set to: $(git config --global user.email)"
-        fi
-
-        git config --global init.defaultBranch dev
-    fi
-}
 
 run_as_root install_essential_tools
 
