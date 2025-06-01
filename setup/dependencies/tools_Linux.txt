@@ -5,3 +5,4 @@ net-tools
 python3-pip
 units
 vim
+zsh

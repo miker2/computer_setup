@@ -1,9 +1,9 @@
 #! /bin/bash
 
-source ../bootstrap.sh
-source common_setup.sh
-
 HERE="$(dirname "$0")"
+
+source ${HERE}/common_setup.sh
+
 echo "Running script located at ${HERE}"
 
 
@@ -22,7 +22,7 @@ CASKS_INSTALLED=("$(brew list --cask)")
 # Here is the list of brews we want to install:
 BREWS_TO_INSTALL="watch findutils coreutils \
   ninja ctags universal-ctags dos2unix \
-  ext4fuse graphviz wget " + "$(cat dependencies/common.txt)"
+  ext4fuse graphviz wget " + "$(cat ${HERE}/dependencies/common.txt)"
 CASKS_TO_INSTALL="xquartz emacs visual-studio-code"
 
 # Upgrade brew:
@@ -62,3 +62,11 @@ fi
 "${HERE}"/modify_system_settings.sh
 
 # Some things that are missing include setting up emacs, downloading and configuring atom
+
+install_python_tools
+
+setup_git
+
+# setup_zsh
+
+# install_dotfiles

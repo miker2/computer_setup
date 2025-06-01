@@ -2,6 +2,17 @@
 
 # This is a collection of common setup functions that are platform agnostic
 
+REPO_ROOT=$(git rev-parse --show-toplevel 2>/dev/null || echo "${HOME}/.dotfiles")
+if [[ ! -d "${REPO_ROOT}" ]]; then
+    echo "Repository root not found. Please run this script from the repository root or set REPO_ROOT."
+    exit 1
+fi
+
+# Source the bootstrap script so we can get 'install_brew'
+if [[ -f "${REPO_ROOT}/bootstrap.sh" ]]; then
+    source "${REPO_ROOT}/bootstrap.sh"
+fi
+
 setup_git() {
     if which git >/dev/null 2>&1; then
         echo -e "\nSetting up git ...\n"
@@ -61,4 +72,48 @@ setup_zsh() {
         echo -e "\noh-my-zsh already installed. Skipping.\n"
     fi
     # Probably want powerlevel10k theme
+}
+
+
+install_dotfiles() {
+    if [ -d "${REPO_ROOT}" ]; then
+        echo "Copying dotfiles to home directory..."
+        for dotfile in "${REPO_ROOT}"/.*; do
+            if [[ -f "${dotfile}" && "${dotfile}" != "${REPO_ROOT}" && "${dotfile}" != "${HOME}/.dotfiles/README.md" ]]; then
+                target_file="${HOME}/$(basename "${dotfile}")"
+                if [ -f "${target_file}" ]; then
+                    echo "File ${target_file} already exists."
+                    while true; do
+                        read -r -p "Overwrite? [yNd?]: " choice
+                        case "${choice}" in
+                            y|Y)
+                                cp -r "${dotfile}" "${target_file}"
+                                echo "Overwritten ${target_file} with ${dotfile}"
+                                break
+                                ;;
+                            N|n|"")
+                                echo "Skipped ${dotfile}"
+                                break
+                                ;;
+                            d|D)
+                                echo "Showing diff between ${target_file} and ${dotfile}:"
+                                diff "${target_file}" "${dotfile}" || echo "No differences found."
+                                ;;
+                            ?)
+                                echo "y - yes, N - no, d - diff, ? - help"
+                                ;;
+                            *)
+                                echo "Invalid option. Please choose [yNd]."
+                                ;;
+                        esac
+                    done
+                else
+                    cp -r "${dotfile}" "${HOME}/"
+                    echo "Copied ${dotfile} to ${HOME}/"
+                fi
+            fi
+        done
+    else
+        echo "No dotfiles found in ${HOME}/.dotfiles"
+    fi
 }

@@ -4,8 +4,9 @@
 # Eventually we can make it smarter by asking the user if they want to install/configure
 # some of the tools
 
-source ../bootstrap.sh
-source common_setup.sh
+HERE="$(dirname "$0")"
+
+source ${HERE}/common_setup.sh
 
 if [[ ${EUID} -eq 0 ]]; then
     echo "This script should not be run as root! Exiting..."
@@ -28,7 +29,8 @@ install_essential_tools() {
     apt-get update
 
     # Basic utilities
-    xargs apt-get install -y < tools.txt
+    xargs apt-get install -y < ${HERE}/dependencies/common.txt
+    xargs apt-get install -y < ${HERE}/dependencies/tools_Linux.txt
 
     if [ -e "$(which nvidia-smi)" ]; then
         apt-get install -y \
@@ -43,7 +45,7 @@ install_dev_tools() {
 
         apt-get update
 
-        xargs apt-get install -y < dependencies/build_Linux.txt
+        xargs apt-get install -y < ${HERE}/dependencies/build_Linux.txt
     fi
 }
 
@@ -96,3 +98,9 @@ fi
 install_python_tools
 
 setup_git
+
+# Some things still to do here:
+# - Install zsh and oh-my-zsh
+# setup_zsh
+# - Copy various dotfiles to the home directory
+# install_dotfiles
