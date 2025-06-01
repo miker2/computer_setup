@@ -42,7 +42,7 @@ done
 for CASK in ${CASKS_TO_INSTALL}; do
 	if [[ ! " ${CASKS_INSTALLED[*]} " =~ "${CASK}" ]]; then
 		echo "${CASK} not installed. Installing."
-		brew cask install "${CASK}"
+brew install --cask "${CASK}"
 	else
 		echo "${CASK} already installed. Skipping..."
 	fi
