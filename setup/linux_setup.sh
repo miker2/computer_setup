@@ -6,7 +6,7 @@
 
 HERE="$(dirname "$0")"
 
-source ${HERE}/common_setup.sh
+source "${HERE}"/common_setup.sh
 
 if [[ ${EUID} -eq 0 ]]; then
     echo "This script should not be run as root! Exiting..."
@@ -29,8 +29,8 @@ install_essential_tools() {
     apt-get update
 
     # Basic utilities
-    xargs apt-get install -y < ${HERE}/dependencies/common.txt
-    xargs apt-get install -y < ${HERE}/dependencies/tools_Linux.txt
+    xargs apt-get install -y < "${HERE}"/dependencies/common.txt
+    xargs apt-get install -y < "${HERE}"/dependencies/tools_Linux.txt
 
     if [ -e "$(which nvidia-smi)" ]; then
         apt-get install -y \
@@ -45,7 +45,7 @@ install_dev_tools() {
 
         apt-get update
 
-        xargs apt-get install -y < ${HERE}/dependencies/build_Linux.txt
+        xargs apt-get install -y < "${HERE}"/dependencies/build_Linux.txt
     fi
 }
 

@@ -58,7 +58,7 @@ _bootstrap_main () {
 	#	echo "Failed to run setup script ${DEST}/setup/${SETUP_FILE}"
 	#	exit 1
 	# }
-	echo "Setup completed successfully."
+	echo "Test completed successfully."
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then

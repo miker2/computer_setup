@@ -10,6 +10,7 @@ fi
 
 # Source the bootstrap script so we can get 'install_brew'
 if [[ -f "${REPO_ROOT}/bootstrap.sh" ]]; then
+    # shellcheck source=../bootstrap.sh
     source "${REPO_ROOT}/bootstrap.sh"
 fi
 
@@ -44,14 +45,14 @@ install_python_tools() {
         echo -e "\nInstalling conda/mamba ...\n"
 
         curl -L -o /tmp/miniforge.sh "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
-bash /tmp/miniforge.sh -b -u -p "${HOME}/miniforge3" # Add flags for non-interactive install
+        bash /tmp/miniforge.sh -b -u -p "${HOME}/miniforge3" # Add flags for non-interactive install
     fi
 
     if [ -e "$(which uv)" ]; then
-        echo -e "\nuv already installed. Skipping.\n"
-    else
         echo -e "\nInstalling uv ...\n"
         curl -LsSf https://astral.sh/uv/install.sh | sh
+    else
+        echo -e "\nuv already installed. Skipping.\n"
     fi
     uv tool install --yes \
         ruff \
@@ -61,7 +62,11 @@ bash /tmp/miniforge.sh -b -u -p "${HOME}/miniforge3" # Add flags for non-interac
 setup_zsh() {
     if [[ -z "$(which zsh)" ]]; then
         echo -e "\nInstalling zsh ...\n"
-        sudo apt-get install -y zsh
+        if [[ "$(uname)" == "Darwin" ]]; then
+            brew install zsh
+        else
+            sudo apt-get install -y zsh
+        fi
     else
         echo -e "\nzsh already installed. Skipping.\n"
     fi
