@@ -44,7 +44,7 @@ install_python_tools() {
         echo -e "\nInstalling conda/mamba ...\n"
 
         curl -L -o /tmp/miniforge.sh "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
-        bash /tmp/miniforge.sh
+bash /tmp/miniforge.sh -b -u -p "${HOME}/miniforge3" # Add flags for non-interactive install
     fi
 
     if [ -e "$(which uv)" ]; then
