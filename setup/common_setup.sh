@@ -54,7 +54,7 @@ install_python_tools() {
         bash /tmp/miniforge.sh -b -u -p "${HOME}/miniforge3" # Add flags for non-interactive install
     fi
 
-    if [ -e "$(which uv)" ]; then
+    if [ -z "$(which uv)" ]; then
         echo -e "\nInstalling uv ...\n"
         curl -LsSf https://astral.sh/uv/install.sh | sh
     else
