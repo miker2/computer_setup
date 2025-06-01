@@ -1,0 +1,8 @@
+emacs-nox
+entr
+neofetch
+net-tools
+python3-pip
+units
+vim
+zsh

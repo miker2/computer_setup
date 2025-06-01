@@ -10,11 +10,11 @@ HISTFILESIZE=1000000000
 HISTSIZE=1000000
 
 
-# End 
+# End
 
 export CLICOLOR=1
 export LSCOLORS=GxBxCxDxexegedabagaced
- 
+
 parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
@@ -50,11 +50,6 @@ __prompt_command() {
 
 # Simple (better) prompt
 #export PS1="\u:\w\$(parse_git_branch)$ "
-
-
-alias ll="ls -al"
-alias g2="grep -rinI --color"
-alias e2="emacs -nw"
 
 if [[ $- == *i* ]]; then
     # history search for bash

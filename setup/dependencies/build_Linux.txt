@@ -1,0 +1,10 @@
+build-essential
+make
+cmake
+ninja-build
+libeigen3-dev
+clang
+clang-tidy
+clang-format
+gdb
+gdb-doc
