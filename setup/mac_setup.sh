@@ -17,13 +17,13 @@ install_brew
 
 # Get the list of brews already installed:
 BREWS_INSTALLED=("$(brew list)")
-CASKS_INSTALLED=("$(brew cask list)")
+CASKS_INSTALLED=("$(brew list --cask)")
 
 # Here is the list of brews we want to install:
-BREWS_TO_INSTALL="bash-completion watch cmake findutils coreutils \
-  ninja clang-format tmux ipython ctags universal-ctags dos2unix \
-  ext4fuse graphviz wget"
-CASKS_TO_INSTALL="xquartz emacs visual-studio-code spectacle iterm2"
+BREWS_TO_INSTALL="watch findutils coreutils \
+  ninja ctags universal-ctags dos2unix \
+  ext4fuse graphviz wget " + "$(cat dependencies/common.txt)"
+CASKS_TO_INSTALL="xquartz emacs visual-studio-code"
 
 # Upgrade brew:
 brew upgrade
