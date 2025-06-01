@@ -16,8 +16,8 @@ fi
 install_brew
 
 # Get the list of brews already installed:
-BREWS_INSTALLED=("$(brew list)")
-CASKS_INSTALLED=("$(brew list --cask)")
+mapfile -t BREWS_INSTALLED < <(brew list)
+mapfile -t CASKS_INSTALLED < <(brew list --cask)
 
 # Here is the list of brews we want to install:
 BREWS_TO_INSTALL="watch findutils coreutils \
