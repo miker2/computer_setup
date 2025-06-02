@@ -14,6 +14,9 @@ if [[ -f "${REPO_ROOT}/bootstrap.sh" ]]; then
     source "${REPO_ROOT}/bootstrap.sh"
 fi
 
+# shellcheck source=setup/colors.sh
+source "${REPO_ROOT}/setup/colors.sh"
+
 setup_git() {
     if which git >/dev/null 2>&1; then
         echo -e "\nSetting up git ...\n"

@@ -10,14 +10,14 @@ HERE="$(dirname "$(realpath "$0")")"
 source "${HERE}"/common_setup.sh
 
 if [[ ${EUID} -eq 0 ]]; then
-    echo "This script should not be run as root! Exiting..."
+    color_print "${_C_BOLD}${_C_ITALIC}${_C_RED}" "This script should not be run as root! Exiting..."
     exit 1
 fi
 
 
 run_as_root() {
     if [[ ${EUID} -ne 0 ]]; then
-        echo "Elevating privileges to run as root..."
+        color_print "${_C_BOLD}${_C_YELLOW}" "Elevating privileges to run as root..."
         sudo bash -c "$(declare -f "${1}"); ${1}"
     else
     "$1"
@@ -25,7 +25,7 @@ run_as_root() {
 }
 
 install_essential_tools() {
-    echo -e "\nInstalling essential tools ...\n"
+    echo -e "\n${_C_CYAN}Installing essential tools ...${_C_RESET}\n"
 
     apt-get update
 
@@ -41,17 +41,15 @@ install_essential_tools() {
 
 
 install_dev_tools() {
-    if [ "$(uname)" == "Linux" ]; then
-        echo -e "\nInstalling dev tools ...\n"
+    echo -e "\n${_C_CYAN}Installing dev tools ...${_C_RESET}\n"
 
-        apt-get update
+    apt-get update
 
-        xargs apt-get install -y < "${HERE}"/dependencies/build_Linux.txt
-    fi
+    xargs apt-get install -y < "${HERE}"/dependencies/build_Linux.txt
 }
 
 install_docker() {
-    echo -e "\nInstalling docker ...\n"
+    echo -e "\n${_C_CYAN}Installing docker ...${_C_RESET}\n"
 
     apt-get update
     # Install some stuff in prep for docker

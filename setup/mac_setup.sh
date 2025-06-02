@@ -13,6 +13,8 @@ if [ -z "$(xcode-select -p)" ]; then
 	xcode-select --install
 fi
 
+export HOMEBREW_NO_ENV_HINTS=1
+
 # We need to get homebrew if we don't already have it.
 install_brew
 
@@ -34,24 +36,26 @@ brew upgrade
 for FORMULA in ${FORMULAS_TO_INSTALL}; do
 	# shellcheck disable=SC2076
 	if [[ ! " ${FORMULAS_INSTALLED[*]} " =~ " ${FORMULA} " ]]; then
-		echo "${FORMULA} not installed. Installing."
+		echo -e "${_C_BOLD}${_C_RED} +++ ${_C_RESET}${FORMULA} not installed. Installing."
 		brew install "${FORMULA}"
 	else
-		echo "${FORMULA} already installed. Skipping..."
+		echo -e "${_C_ITALIC}${_C_CYAN}${FORMULA}${_C_RESET} already installed. Skipping..."
 	fi
 done
 
 for CASK in ${CASKS_TO_INSTALL}; do
 	# shellcheck disable=SC2076
 	if [[ ! " ${CASKS_INSTALLED[*]} " =~ " ${CASK} " ]]; then
-		echo "${CASK} not installed. Installing."
+		echo -e "${_C_BOLD}${_C_RED} +++ ${_C_RESET}${CASK} not installed. Installing."
         brew install --cask "${CASK}"
 	else
-		echo "${CASK} already installed. Skipping..."
+		echo -e "${_C_ITALIC}${_C_CYAN}${CASK}${_C_RESET} already installed. Skipping..."
 	fi
 done
 # Clean up:
 brew cleanup
+
+unset HOMEBREW_NO_ENV_HINTS
 
 # If the git-completion.bash file doesn't exist, copy it to bash_completion.d
 if [ ! -f /usr/local/etc/bash_completion.d/git-completion ] && \
