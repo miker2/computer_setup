@@ -10,7 +10,7 @@ fi
 
 # Source the bootstrap script so we can get 'install_brew'
 if [[ -f "${REPO_ROOT}/bootstrap.sh" ]]; then
-    # shellcheck source=../bootstrap.sh
+    # shellcheck source=bootstrap.sh
     source "${REPO_ROOT}/bootstrap.sh"
 fi
 

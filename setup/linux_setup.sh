@@ -4,8 +4,9 @@
 # Eventually we can make it smarter by asking the user if they want to install/configure
 # some of the tools
 
-HERE="$(dirname "$0")"
+HERE="$(dirname "$(realpath "$0")")"
 
+# shellcheck source=setup/common_setup.sh
 source "${HERE}"/common_setup.sh
 
 if [[ ${EUID} -eq 0 ]]; then

@@ -1,7 +1,8 @@
 #! /bin/bash
 
-HERE="$(dirname "$0")"
+HERE="$(dirname "$(realpath "$0")")"
 
+# shellcheck source=setup/common_setup.sh
 source "${HERE}/common_setup.sh"
 
 echo "Running script located at ${HERE}"
