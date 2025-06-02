@@ -1,0 +1,40 @@
+
+[alias]
+
+        ## %AUTO_GIT_SETUP_START%
+	co = checkout
+	cob = checkout -b
+	coo = !git fetch && git checkout
+	st = status
+	logs = log --stat
+	glog = log --graph
+	pu = !git push --set-upstream origin $(git branch --show-current)
+	# Some nice aliases I found here:
+	# https://gist.github.com/johnpolacek/69604a1f6861129ef088
+	unstage = reset --soft HEAD^
+	ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+	# This alias will take all changes from an existing PR and copy them onto
+	# a new branch, squashing all commits into one
+	cp-pr = "!f() { \
+          current_branch=$(git rev-parse --abbrev-ref HEAD) && \
+          base_branch=${2:-origin/main} && \
+          fork_point=$(git merge-base $base_branch $1) && \
+          git checkout -b temp-branch $fork_point && \
+          git cherry-pick $(fork_point)..$(git rev-parse $1) && \
+          git reset --soft $fork_point && \
+          git commit -m \"Squashed commit of the following from branch $1\" && \
+          git checkout $current_branch && \
+          git cherry-pick $(git rev-parse temp-branch) && \
+          git branch -D temp-branch; \
+	}; f"
+	# This alias will find all of the commits made by the current user since the
+	# most recent release tag
+	log-diff = "!f() { \
+	  latest_release=$(git tag --sort=-creatordate | grep release- | head -n1) && \
+          base_branch=${1:-$latest_release} && \
+          current_user=$(git config user.name) && \
+          git log --author=\"${current_user}\" $base_branch..origin/main; \
+	}; f"
+	shrink = !git reset --soft $(git merge-base origin/dev HEAD)
+        ## %AUTO_GIT_SETUP_END%
