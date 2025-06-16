@@ -24,14 +24,27 @@ fi
 
 . "$HOME/.local/bin/env"
 
+setopt promptsubst
 autoload -Uz vcs_info
 zstyle ':vcs_info;*' enable git  # Only run for git
 zstyle ':vcs_info:git*' check-for-changes true
-zstyle ':vcs_info:git*' formats "%F{red}(%b)%f"
-precmd() {
+zstyle ':vcs_info:git*' get-revision true
+zstyle ':vcs_info:git*' formats '%F{red}(%b)%f'
+zstyle ':vcs_info:git*' actionformats '%F{red}(%b|%(S.*%S.)%(u.+%u.))%f'
+precmd_conda_info() {
+  if [[ -n $CONDA_DEFAULT_ENV ]]; then
+    CONDA_PROMPT_MODIFIER="($CONDA_DEFAULT_ENV) "
+  else
+    CONDA_PROMPT_MODIFIER=""
+  fi
+}
+precmd_functions+=( precmd_conda_info )
+precmd_first_line() {
     vcs_info
     print # Newline for clean separation 
-    print -rP $'\U256D\U2574'"%F{green}%n@%m%f %F{blue}%0~%f ${vcs_info_msg_0_}" 
+    print -rP $'\U256D\U2574'"%F{cyan}$CONDA_PROMPT_MODIFIER%f%F{green}%n@%m%f %F{blue}%0~%f ${vcs_info_msg_0_}" 
 }
-PROMPT=$'\U2570\U2574'"%F{blue}%# >%f "
+precmd_functions+=( precmd_first_line )
+PROMPT=$'\U2570\U2574'"%(?.%F{green}√%f.%F{red}✗%?%f) %F{blue}%# >%f "
+# RPROMPT="${vcs_info_msg_0_}"
 
